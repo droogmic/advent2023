@@ -1,0 +1,19 @@
+[package]
+name = "advent2023-web"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+advent2023-lib = { path = "../advent2023-lib" }
+console_log = { version = "0.2", optional = true, features = ["color"] }
+gloo-file = "0.3"
+js-sys = "0.3"
+log = "0.4"
+yew = { version = "0.21", features = ["csr"] }
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["File", "HtmlInputElement", "DataTransfer"]
+
+[features]
+default = ["console_log"]

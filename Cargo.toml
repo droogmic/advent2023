@@ -1,0 +1,4 @@
+[workspace]
+resolver = "2"
+members = ["advent2023-lib", "advent2023-bin", "advent2023-web"]
+default-members = ["advent2023-lib", "advent2023-bin"]
