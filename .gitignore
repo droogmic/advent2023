@@ -1,3 +1,5 @@
+*.code-workspace
+
 /target
 /dist
 /.venv
