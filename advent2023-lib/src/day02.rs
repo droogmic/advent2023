@@ -115,32 +115,3 @@ pub const DAY: Day<Records, usize, 1, 0, 0> = Day {
     },
     examples: Examples::single(include_str!("../../examples/day02.txt")),
 };
-
-// #[cfg(test)]
-// mod tests {
-//     use test_log::test;
-
-//     use super::*;
-//     use crate::get_input;
-
-//     #[test]
-//     fn test_example_part1() {
-//         let something = parse(DAY.example).unwrap();
-//         let result = play(&something);
-//         assert_eq!(result, -1);
-//     }
-
-//     #[test]
-//     fn test_example_part2() {
-//         let something = parse(DAY.example).unwrap();
-//         let result = play(&something);
-//         assert_eq!(result, -1);
-//     }
-
-//     #[test]
-//     fn test_main() {
-//         let something = parse(&get_input(0)).unwrap();
-//         assert_eq!(part1(&something).answer.to_string(), "-1");
-//         assert_eq!(part2(&something).answer.to_string(), "-1");
-//     }
-// }
