@@ -1,4 +1,4 @@
-use crate::{Day, DayCalc, ParseError, ParseResult, PartOutput};
+use crate::{Day, DayCalc, Examples, ParseError, ParseResult, PartOutput};
 
 #[derive(Debug)]
 pub struct Something {}
@@ -15,18 +15,18 @@ pub fn part2(_something: &Something) -> PartOutput<usize> {
     PartOutput { answer: 0 }
 }
 
-pub const DAY: Day<Something, usize> = Day {
+pub const DAY: Day<Something, usize, 1, 0, 0> = Day {
     title: "TITLE",
     display: (
-        "Foobar foobar foobar {answer}",
-        "Foobar foobar foobar {answer}",
+        "Foobar foobar foobar {answer}.",
+        "Foobar foobar foobar {answer}.",
     ),
     calc: DayCalc {
         parse,
         part1,
         part2,
     },
-    example: include_str!("../../examples/day00.in.txt"),
+    examples: Examples::single(include_str!("../../examples/day00.in.txt")),
 };
 
 #[cfg(test)]

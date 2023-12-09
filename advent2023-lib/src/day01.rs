@@ -114,7 +114,7 @@ pub fn part2(chars: &Chars) -> PartOutput<usize> {
                 let first = Digit::find_first(line).unwrap();
                 let last = Digit::find_last(line).unwrap();
                 log::debug!(
-                    "On line {:?} the first digit is {} and the last is {}",
+                    "on line {:?} the first digit is {} and the last is {}",
                     String::from_iter(line.iter()),
                     first,
                     last,

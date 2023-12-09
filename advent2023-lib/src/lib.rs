@@ -9,6 +9,7 @@ use recap::Error as RecapError;
 use strum::ParseError as StrumParseError;
 
 mod day01;
+mod day02;
 pub mod parser;
 mod test;
 
@@ -77,7 +78,7 @@ pub struct Examples<const C: usize, const F: usize, const S: usize> {
     pub part2: [&'static str; S],
 }
 impl Examples<1, 0, 0> {
-    const fn _single(include_str: &'static str) -> Self {
+    const fn single(include_str: &'static str) -> Self {
         Examples {
             common: [include_str],
             part1: [],
@@ -204,6 +205,7 @@ impl<
 pub fn get_days() -> BTreeMap<usize, Box<dyn DayTrait + 'static>> {
     let mut days: BTreeMap<usize, Box<dyn DayTrait + 'static>> = BTreeMap::new();
     days.insert(1, Box::new(day01::DAY));
+    days.insert(2, Box::new(day02::DAY));
     days
 }
 
