@@ -103,10 +103,10 @@ pub fn part2(records: &Records) -> PartOutput<usize> {
 }
 
 pub const DAY: Day<Records, usize, 1, 0, 0> = Day {
-    title: "TITLE",
+    title: "Cube Conundrum",
     display: (
         "The sum of the IDs of the possible games is {answer}.",
-        "Foobar foobar foobar {answer}.",
+        "The sum of the powers is {answer}.",
     ),
     calc: DayCalc {
         parse,

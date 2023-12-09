@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::str::FromStr;
 
 const DELIMITERS: [&str; 6] = ["\n\n", "\n", ",", " ", ":", "-"];
@@ -46,6 +47,27 @@ pub fn read_vec2<T: FromStr>(input: &str) -> Result<Vec<Vec<T>>, T::Err> {
             })
             .collect::<Result<Vec<Vec<T>>, _>>()
     }
+}
+
+pub trait FromChar: Sized {
+    type Err;
+
+    fn from_char(c: char) -> Result<Self, Self::Err>;
+}
+
+pub fn read_map<T: FromChar>(input: &str) -> Result<HashMap<(usize, usize), T>, T::Err> {
+    log::trace!("input: {input}");
+    let mut map = HashMap::new();
+    for (row, line) in input.lines().enumerate() {
+        for (col, char) in line.chars().enumerate() {
+            // Add 1 to avoid trivial underflows
+            let existing = map.insert((col + 1, row + 1), T::from_char(char)?);
+            if let Some(_) = existing {
+                panic!("unexpected key found");
+            }
+        }
+    }
+    Ok(map)
 }
 
 #[cfg(test)]
