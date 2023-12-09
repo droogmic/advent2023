@@ -1,12 +1,13 @@
 use strum::IntoEnumIterator;
 use strum_macros::{Display, EnumIter, EnumString, FromRepr};
 
-use crate::{parser::read_vec2, Day, DayCalc, Examples, ParseResult, PartOutput};
+use crate::parser::read_vec2;
+use crate::{Day, DayCalc, Examples, ParseResult, PartOutput};
 
 pub struct Chars(Vec<Vec<char>>);
 
 pub fn parse(input: &str) -> ParseResult<Chars> {
-    Ok(Chars(read_vec2::<char>(&input)?))
+    Ok(Chars(read_vec2::<char>(input)?))
 }
 
 pub fn part1(chars: &Chars) -> PartOutput<usize> {
@@ -61,9 +62,8 @@ impl Digit {
             for color in Self::iter() {
                 let color_str = color.to_string();
                 let end_index = index + color_str.len();
-                if let Some(potential) = s
-                    .get(index..end_index)
-                    .and_then(|s| Some(String::from_iter(s.iter())))
+                if let Some(potential) =
+                    s.get(index..end_index).map(|s| String::from_iter(s.iter()))
                 {
                     log::trace!("comparing {} to {}", potential, color_str);
                     if potential == color_str {
@@ -74,7 +74,7 @@ impl Digit {
             }
         }
         log::error!("no match for {}", String::from_iter(s.iter()));
-        return None;
+        None
     }
 
     fn find_last(s: &[char]) -> Option<Self> {
@@ -89,7 +89,7 @@ impl Digit {
                 {
                     if let Some(potential) = s
                         .get(start_index..=index)
-                        .and_then(|s| Some(String::from_iter(s.iter())))
+                        .map(|s| String::from_iter(s.iter()))
                     {
                         log::trace!("comparing {} to {}", potential, color_str);
                         if potential == color_str {
@@ -101,7 +101,7 @@ impl Digit {
             }
         }
         log::error!("no match for {}", String::from_iter(s.iter()));
-        return None;
+        None
     }
 }
 
@@ -111,15 +111,15 @@ pub fn part2(chars: &Chars) -> PartOutput<usize> {
             .0
             .iter()
             .map(|line| {
-                let first = Digit::find_first(&line).unwrap();
-                let last = Digit::find_last(&line).unwrap();
+                let first = Digit::find_first(line).unwrap();
+                let last = Digit::find_last(line).unwrap();
                 log::debug!(
                     "On line {:?} the first digit is {} and the last is {}",
                     String::from_iter(line.iter()),
                     first,
                     last,
                 );
-                usize::try_from(10 * first.val() + last.val()).unwrap()
+                10 * first.val() + last.val()
             })
             .sum::<usize>(),
     }

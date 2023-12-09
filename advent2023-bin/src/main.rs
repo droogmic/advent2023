@@ -43,10 +43,10 @@ fn main() -> Result<(), Report> {
     let args = Cli::from_args();
     let days = get_days();
 
-    let get_result_pair = move |day_num: usize, day: &Box<dyn DayTrait>| -> (String, String) {
+    let get_result_pair = move |day_num: usize, day: &dyn DayTrait| -> (String, String) {
         if args.example {
             match day.get_examples() {
-                PrimaryExample::Same(example) => day.both(&example).expect("invalid example"),
+                PrimaryExample::Same(example) => day.both(example).expect("invalid example"),
                 PrimaryExample::Different([first, second]) => (
                     day.calc(Part::First, first).unwrap(),
                     day.calc(Part::Second, second).unwrap(),
@@ -60,12 +60,22 @@ fn main() -> Result<(), Report> {
 
     if args.all {
         for (day_num, day) in days.into_iter() {
-            print_day(day_num, day.get_display(), get_result_pair(day_num, &day));
+            print_day(
+                day_num,
+                day.get_display(),
+                get_result_pair(day_num, day.as_ref()),
+            );
         }
     } else if args.parallel {
         let threads = get_days().into_iter().map(|(day_num, day)| {
             println!("Spawn day {}", day_num);
-            std::thread::spawn(move || (day_num, day.get_display(), get_result_pair(day_num, &day)))
+            std::thread::spawn(move || {
+                (
+                    day_num,
+                    day.get_display(),
+                    get_result_pair(day_num, day.as_ref()),
+                )
+            })
         });
         std::thread::yield_now();
         std::thread::sleep(std::time::Duration::from_millis(50));
@@ -79,10 +89,14 @@ fn main() -> Result<(), Report> {
             None => {
                 let (last_day_num, last_day) = days.iter().next_back().unwrap();
                 (*last_day_num, last_day)
-            }
+            },
             Some(day_num) => (day_num, days.get(&day_num).unwrap()),
         };
-        print_day(day_num, day.get_display(), get_result_pair(day_num, day));
+        print_day(
+            day_num,
+            day.get_display(),
+            get_result_pair(day_num, day.as_ref()),
+        );
     }
 
     Ok(())

@@ -124,14 +124,14 @@ impl<D, O, const C: usize, const F: usize, const S: usize> Printable for Day<D, 
         let first = self
             .examples
             .part1
-            .get(0)
-            .or(self.examples.common.get(0))
+            .first()
+            .or(self.examples.common.first())
             .unwrap();
         let second = self
             .examples
             .part2
-            .get(0)
-            .or(self.examples.common.get(0))
+            .first()
+            .or(self.examples.common.first())
             .unwrap();
         if first == second {
             PrimaryExample::Same(first)
