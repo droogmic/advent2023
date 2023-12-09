@@ -23,8 +23,6 @@ impl FromChar for SchematicCell {
 
 #[derive(Debug)]
 pub struct Part {
-    x: usize,
-    y: usize,
     symbol: char,
     numbers: Vec<usize>,
 }
@@ -98,8 +96,6 @@ pub fn parse(input: &str) -> ParseResult<Schematic> {
                 numbers.push(construct_right(&map, (x + 1, y)));
             }
             parts.push(Part {
-                x,
-                y,
                 symbol: *symbol,
                 numbers,
             });

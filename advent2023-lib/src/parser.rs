@@ -62,7 +62,7 @@ pub fn read_map<T: FromChar>(input: &str) -> Result<HashMap<(usize, usize), T>, 
         for (col, char) in line.chars().enumerate() {
             // Add 1 to avoid trivial underflows
             let existing = map.insert((col + 1, row + 1), T::from_char(char)?);
-            if let Some(_) = existing {
+            if existing.is_some() {
                 panic!("unexpected key found");
             }
         }
