@@ -46,7 +46,9 @@ fn main() -> Result<(), Report> {
     let get_result_pair = move |day_num: usize, day: &dyn DayTrait| -> (String, String) {
         if args.example {
             match day.get_examples() {
-                PrimaryExample::Same(example) => day.both(example).expect("invalid example"),
+                PrimaryExample::Same(example) => {
+                    day.both(example).expect("example should be valid")
+                },
                 PrimaryExample::Different([first, second]) => (
                     day.calc(Part::First, first).unwrap(),
                     day.calc(Part::Second, second).unwrap(),

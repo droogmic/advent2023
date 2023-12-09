@@ -11,6 +11,7 @@ use strum::ParseError as StrumParseError;
 mod day01;
 mod day02;
 mod day03;
+mod day04;
 pub mod parser;
 mod test;
 
@@ -208,6 +209,7 @@ pub fn get_days() -> BTreeMap<usize, Box<dyn DayTrait + 'static>> {
     days.insert(1, Box::new(day01::DAY));
     days.insert(2, Box::new(day02::DAY));
     days.insert(3, Box::new(day03::DAY));
+    days.insert(4, Box::new(day04::DAY));
     days
 }
 
