@@ -96,8 +96,7 @@ pub fn part2(records: &Records) -> PartOutput<usize> {
                 let min_red = game.hands.iter().map(|hand| hand.red).max().unwrap();
                 let min_green = game.hands.iter().map(|hand| hand.green).max().unwrap();
                 let min_blue = game.hands.iter().map(|hand| hand.blue).max().unwrap();
-                let power = min_red * min_green * min_blue;
-                power
+                min_red * min_green * min_blue
             })
             .sum(),
     }
