@@ -1,5 +1,5 @@
 use std::collections::{HashMap, HashSet};
-use std::ops::ShlAssign;
+
 use std::str::FromStr;
 
 use once_cell::sync::Lazy;
@@ -43,7 +43,6 @@ impl FromStr for Card {
                 .parse()
                 .or(Err(ParseError::Str(format!("card {}", &captures["id"]))))?,
             winning: captures["winning"]
-                .trim()
                 .split_whitespace()
                 .map(usize::from_str)
                 .collect::<Result<HashSet<_>, _>>()
@@ -52,7 +51,6 @@ impl FromStr for Card {
                     &captures["winning"]
                 ))))?,
             selected: captures["selected"]
-                .trim()
                 .split_whitespace()
                 .map(usize::from_str)
                 .collect::<Result<HashSet<_>, _>>()
