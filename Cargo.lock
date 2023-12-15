@@ -39,6 +39,7 @@ dependencies = [
  "env_logger",
  "log",
  "ndarray",
+ "num-integer",
  "once_cell",
  "pathfinding",
  "recap",
