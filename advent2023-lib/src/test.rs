@@ -4,7 +4,13 @@ mod tests {
 
     use crate::{get_days, Part, PrimaryExample};
 
-    const EXAMPLE_ANSWERS: [[&'static str; 2]; 1] = [["142", "281"]];
+    const EXAMPLE_ANSWERS: [[&'static str; 2]; 5] = [
+        ["142", "281"],
+        ["8", "2286"],
+        ["4361", "467835"],
+        ["13", "30"],
+        ["35", "46"],
+    ];
 
     #[test]
     fn test_days_examples() {
@@ -17,7 +23,9 @@ mod tests {
                     day.calc(Part::Second, second).unwrap(),
                 ),
             };
-            let expected = EXAMPLE_ANSWERS.get(day_num - 1).unwrap();
+            let expected = EXAMPLE_ANSWERS
+                .get(day_num - 1)
+                .expect(&format!("answer should be provided for day {}", day_num));
             let expected_part1 = expected[0];
             let expected_part2 = expected[1];
             assert_eq!(

@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 use std::num::ParseIntError;
-use std::ops::{Deref, RangeInclusive};
+use std::ops::RangeInclusive;
 use std::str::FromStr;
 
 use crate::{Day, DayCalc, Examples, ParseError, ParseResult, PartOutput};
@@ -154,8 +154,7 @@ impl Almanac {
         for map in self.maps.iter().rev() {
             vals = vals
                 .into_iter()
-                .map(|val| map.invert_convert(val))
-                .flatten()
+                .flat_map(|val| map.invert_convert(val))
                 .collect();
         }
         vals
