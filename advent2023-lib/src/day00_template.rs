@@ -1,7 +1,17 @@
+use std::str::FromStr;
+
 use crate::{Day, DayCalc, Examples, ParseError, ParseResult, PartOutput};
 
 #[derive(Debug)]
 pub struct Something {}
+
+impl FromStr for Something {
+    type Err = ParseError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        todo!()
+    }
+}
 
 pub fn parse(input: &str) -> ParseResult<Something> {
     Ok(Something {})
