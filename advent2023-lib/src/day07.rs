@@ -59,7 +59,7 @@ impl Card {
             Self::A => 'A',
         }
     }
-    fn into_joker(&self) -> Self {
+    fn to_joker(&self) -> Self {
         match self {
             Self::J => Self::Joker,
             _ => self.clone(),
@@ -95,11 +95,11 @@ impl Display for Hand {
 }
 
 impl Hand {
-    fn into_joker(&self) -> Self {
+    fn to_joker(&self) -> Self {
         Self(
             self.0
                 .iter()
-                .map(Card::into_joker)
+                .map(Card::to_joker)
                 .collect::<Vec<_>>()
                 .try_into()
                 .unwrap(),
@@ -149,10 +149,10 @@ impl HandType {
             [a, b, c, d, e] if a == b && b == c && c == d && d == e => Self::FiveKind,
             [a, b, c, d, e] if b == c && c == d && (a == b || d == e) => Self::FourKind,
             [a, b, c, d, e] if a == b && (b == c || c == d) && d == e => Self::FullHouse,
-            [a, b, c, d, e] if (a == b && b == c) || (b == c && c == d) || (c == d && d == e) => {
+            [a, b, c, d, e] if (a == b || c == d) && (b == c) || (c == d && d == e) => {
                 Self::ThreeKind
             },
-            [a, b, c, d, e] if (a == b && c == d) || (a == b && d == e) || (b == c && d == e) => {
+            [a, b, c, d, e] if (a == b) && (c == d || d == e) || (b == c && d == e) => {
                 Self::TwoPair
             },
             [a, b, c, d, e] if a == b || b == c || c == d || d == e => Self::OnePair,
@@ -218,8 +218,8 @@ pub fn part2(cards: &CamelCards) -> PartOutput<usize> {
         .iter()
         .map(|(hand, bid)| {
             (
-                HandType::from_hand_counter(&hand.into_joker()),
-                hand.into_joker(),
+                HandType::from_hand_counter(&hand.to_joker()),
+                hand.to_joker(),
                 *bid,
             )
         })
