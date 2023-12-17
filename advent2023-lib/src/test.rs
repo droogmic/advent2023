@@ -4,13 +4,14 @@ mod tests {
 
     use crate::{get_days, Part, PrimaryExample};
 
-    const EXAMPLE_ANSWERS: [[&'static str; 2]; 6] = [
+    const EXAMPLE_ANSWERS: [[&'static str; 2]; 7] = [
         ["142", "281"],
         ["8", "2286"],
         ["4361", "467835"],
         ["13", "30"],
         ["35", "46"],
         ["288", "71503"],
+        ["6440", ""],
     ];
 
     #[test]

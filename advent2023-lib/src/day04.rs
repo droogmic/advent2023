@@ -1,5 +1,4 @@
 use std::collections::{HashMap, HashSet};
-
 use std::str::FromStr;
 
 use once_cell::sync::Lazy;
@@ -95,7 +94,7 @@ pub fn part2(pile_of_cards: &PileOfColourfulCards) -> PartOutput<usize> {
 }
 
 pub const DAY: Day<PileOfColourfulCards, usize, 1, 0, 0> = Day {
-    title: "TITLE",
+    title: "Scratchcards",
     display: (
         "The scratchcards are worth {answer} points.",
         "We end up with {answer} scratchcards.",
